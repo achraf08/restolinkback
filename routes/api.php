@@ -22,3 +22,9 @@ Route::get('restaurant/{id}','restaurantController@show');
 Route::post('restaurant','restaurantController@store');
 Route::put('restaurant/{id}','restaurantController@update');
 Route::delete('restaurant/{id}','restaurantController@delete');
+
+Route::get('reservations','reservationController@index');
+Route::get('reservation/{id}','reservationController@show');
+Route::post('reservation','reservationController@store');
+Route::put('reservation/{id}','reservationController@update');
+Route::delete('reservation/{id}','reservationController@delete');

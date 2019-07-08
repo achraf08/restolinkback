@@ -8,6 +8,9 @@ class Restaurant extends Eloquent
 {
     protected $connection ='mongodb';
     protected $collection ='restaurants';
-
-    protected $fillable = ['name'];
+    protected $fillable = ['name','address','type','image'];
+    protected $casts = [
+        'numberOfStars' => 'integer',
+        'numberOfLikes' => 'integer',
+    ];
 }
