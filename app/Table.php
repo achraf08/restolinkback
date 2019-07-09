@@ -9,6 +9,8 @@ class Table extends Eloquent
 {
     protected $connection ='mongodb';
     protected $collection ='tables';
+    protected $fillable = ['numberOfPlaces','numberOfTable','status'];
+
     protected $casts = [
         'numberOfPlaces' => 'integer',
         'numberOfTable' => 'integer',

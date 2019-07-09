@@ -9,7 +9,12 @@ class Room extends Eloquent
 {
     protected $connection ='mongodb';
     protected $collection ='rooms';
+    protected $fillable = ['status'];
     protected $casts = [
         'status' => 'boolean',
     ];
+    public function tables()
+    {
+        return $this->hasMany('App\Table');
+    }
 }
