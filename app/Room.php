@@ -9,7 +9,7 @@ class Room extends Eloquent
 {
     protected $connection ='mongodb';
     protected $collection ='rooms';
-    protected $fillable = ['status'];
+    protected $fillable = ['status','title'];
     protected $casts = [
         'status' => 'boolean',
     ];
