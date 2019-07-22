@@ -9,16 +9,15 @@ class Table extends Eloquent
 {
     protected $connection ='mongodb';
     protected $collection ='tables';
-    protected $fillable = ['numberOfPlaces','numberOfTable','status'];
-
+    protected $fillable = ['seats','numberOfTable','status'];
     protected $casts = [
-        'numberOfPlaces' => 'integer',
+        'seats' => 'integer',
         'numberOfTable' => 'integer',
         'status' => 'boolean',
     ];
     public function rooms()
     {
-    return $this->belongsTo('App\Room');
+    return $this->belongsTo(Room::class);
     }
 
 }

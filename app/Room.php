@@ -15,7 +15,7 @@ class Room extends Eloquent
     ];
     public function tables()
     {
-        return $this->hasMany('App\Table');
+        return $this->hasMany(Table::class);
     }
     public function rooms()
     {
