@@ -26,6 +26,8 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+    //$accessToken = auth()->user()->createToken('authtoken')->accessToken;
+    //return response(['user'=>auth()->user(),'access_token'=>$accessToken]);
 
     /**
      * Create a new controller instance.
@@ -34,6 +36,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+       
         $this->middleware('guest')->except('logout');
     }
 }
