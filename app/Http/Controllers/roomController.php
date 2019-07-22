@@ -14,7 +14,7 @@ class roomController extends Controller
         return Room::find($id);
     }
     public function store(Request $request){
-        return room::create($request->all());
+        return Room::create($request->all());
     }
     public function update(Request $request,$id){
         $room = Room::findorFail($id);

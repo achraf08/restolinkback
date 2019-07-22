@@ -16,4 +16,9 @@ class Table extends Eloquent
         'numberOfTable' => 'integer',
         'status' => 'boolean',
     ];
+    public function rooms()
+    {
+    return $this->belongsTo('App\Room');
+    }
+
 }

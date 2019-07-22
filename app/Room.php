@@ -17,4 +17,8 @@ class Room extends Eloquent
     {
         return $this->hasMany('App\Table');
     }
+    public function rooms()
+    {
+    return $this->belongsTo('App\Restaurant');
+    }
 }
