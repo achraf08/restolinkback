@@ -11,7 +11,14 @@ class tableController extends Controller
 {
 
     public function index(Request $request){
-        return Table::all();
+        $tables = Table::with('rooms')->get();
+        return $tables;
+    }
+    public function list(Request $request){
+        $tables = Table::with('rooms')->get()
+        ->where('rooms._id = tables.rooms_id');
+        
+        return $tables;
     }
     public function show($id){
         return Table::find($id);

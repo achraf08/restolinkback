@@ -2,18 +2,15 @@
 
 namespace App;
 
-use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
-use Illuminate\Contracts\Auth\Authenticatable;
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Jenssegers\Mongodb\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
+class User extends Authenticatable implements JWTSubject
 
-class User extends Eloquent implements Authenticatable
 {
-    use AuthenticatableTrait;
-    use Notifiable, HasApiTokens;
+    use Notifiable;
     protected $connection ='mongodb';
     protected $collection ='users';
 
@@ -22,8 +19,11 @@ class User extends Eloquent implements Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password','username','type',
+    protected $fillable = [        
+        'firstName','lastName', 'email', 'password',
+        'provider', 'provider_id',
+        'is_activated','type','phoneNumber','status','role',
+        'birthdate','address','country','state','gender'
     ];
 
     /**
@@ -43,4 +43,32 @@ class User extends Eloquent implements Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function users()
+    {
+    return $this->belongsTo(Restaurant::class);
+    }
+    public function files()
+    {
+        return $this->hasMany(File::class);
+    }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+    public function roles(){
+        return $this->belongsToMany('App\Role');
+    }
 }

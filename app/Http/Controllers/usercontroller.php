@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class usercontroller extends Controller
 {
@@ -14,21 +16,26 @@ class usercontroller extends Controller
      *
      * @return void
      */
-    public function __construct()
+ /* 
+     public function __construct()
     {
        $this->middleware('auth:api');
     }
-
+*/
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    /*
+    public function index(){
+        return User::all();
     }
-
+    */
+    public function index(){
+    $users = User::with('orders')->get();
+    return $users;
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -45,11 +52,29 @@ class usercontroller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+        return User::create([
+            'lastName' => $request->lastName,
+            'firstName' => $request->firstName,
+            'password' => Hash::make($request->password),
+            'email' => $request->email,
+            'type' => $request->type,
+            'phoneNumber' => $request->phoneNumber,
+            'status' => $request->status,
+            'role' => $request->role,
+            'birthdate' => $request->birthdate,
+            'address' => $request->address,
+            'country' => $request->country,
+            'state' => $request->state,
+                ]);
+        //return User::create($request->all());
     }
+    public function delete(Request $request,$id){
+        $user = User::findorFail($id);
+        $user->delete();
 
+        return 204;
+    }
     /**
      * Display the specified resource.
      *
@@ -79,9 +104,11 @@ class usercontroller extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
-    {
-        //
+    public function update(Request $request,$id){
+        $employee = User::findorFail($id);
+        $employee->update($request->all());
+
+        return $employee;
     }
 
     /**

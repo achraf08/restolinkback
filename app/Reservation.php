@@ -9,10 +9,11 @@ class Reservation extends Eloquent
 {
     protected $connection ='mongodb';
     protected $collection ='reservations';
-    protected $fillable = ['status','hourReservation'];
+    protected $fillable = ['status','hourReservation','clientName','email','number','tableId','clientId'];
 
     protected $casts = [
         'status' => 'boolean',
-        'hourReservation' => 'datetime',
+        'number' => 'integer',
+        'clientName' => 'string'
     ];
 }

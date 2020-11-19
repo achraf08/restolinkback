@@ -15,6 +15,10 @@ class Restaurant extends Eloquent
     ];
     public function rooms()
     {
-        return $this->hasMany('App\Room');
+        return $this->hasMany(Room::class);
+    }
+    public function employees()
+    {
+        return $this->hasMany(User::class);
     }
 }
